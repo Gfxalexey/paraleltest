@@ -13,7 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class paraleltest1 extends BaseTest{
+public class paraleltest1 extends BaseTest {
+
 //    public AppiumDriver<MobileElement> driver;
 //    @Parameters({"device","appiumServer"})
 //    @BeforeClass
@@ -31,16 +32,12 @@ public class paraleltest1 extends BaseTest{
 //        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 //    }
 
-@Test
-public void login() throws InterruptedException {
-    LoginPage loginPage = new LoginPage(driver);
-    loginPage.EnterButton.click();
-    Thread.sleep(1000);
-    loginPage.loginsucces("320555683","1q1q1q","1q1q1q");
+    @Test
+    public void login() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.EnterButton.click();
+        Thread.sleep(1000);
+        loginPage.loginsucces("320555683", "1q1q1q", "1q1q1q");
 
-}
-    @AfterClass
-    public void teardown(){
-        driver.closeApp();
     }
 }
