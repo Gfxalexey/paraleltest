@@ -43,6 +43,9 @@
   </component>
   <component name="ProjectId" id="1T0mKIAtBCJyes5iFOnIsT0Hc7E" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="module&#10;directory&#10;repository" />
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
