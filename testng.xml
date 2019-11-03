@@ -15,5 +15,11 @@
             <class name="paraleltest1"/>
         </classes>
     </test>
-
+    <test name="oneplus Test">
+        <parameter name="device" value="192.168.1.132:5555"></parameter>
+        <parameter name="appiumServer" value="http://127.0.0.1:4734/wd/hub"></parameter>
+        <classes>
+            <class name="paraleltest1"/>
+        </classes>
+    </test>
 </suite>
