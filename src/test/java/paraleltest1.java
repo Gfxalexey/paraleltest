@@ -39,7 +39,9 @@ public class paraleltest1 extends BaseTest {
         loginPage.EnterButton.click();
         Thread.sleep(1000);
         loginPage.loginsucces("320555683", "1q1q1q", "1q1q1q");
-        Thread.sleep(5000); //fgdfg
+        Thread.sleep(10000); //fgdfg
+        driver.navigate().back();
+        Thread.sleep(3000);
 
     }
 

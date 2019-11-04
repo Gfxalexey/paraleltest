@@ -15,19 +15,22 @@ public class BaseTest {
     public AppiumDriver driver;
 
     public static ThreadLocal<AppiumDriver> tdriver = new ThreadLocal<AppiumDriver>();
-        @Parameters({"device", "appiumServer"})
+        @Parameters({"device", "appiumServer","systemPort"})
         @BeforeTest (alwaysRun = true)
 
-    public AppiumDriver setup(String device, String appiumServer) throws MalformedURLException {
+    public AppiumDriver setup(String device, String appiumServer, String systemPort) throws MalformedURLException {
             try {
         DesiredCapabilities cap = new DesiredCapabilities();
+//        cap.setCapability(AutomationName.ANDROID_UIAUTOMATOR2,"uiautomator");
+        cap.setCapability("automationName", "UiAutomator2");
+        cap.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT,systemPort);
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, device);
         cap.setCapability(MobileCapabilityType.UDID, device);
         cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 120);
         cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.ideomobile.discount");
         cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.discount.ui.DiscountSplashActivity");
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
-        cap.setCapability(MobileCapabilityType.VERSION, 9);
+//        cap.setCapability(MobileCapabilityType.VERSION, 9);
         URL url = new URL(appiumServer);
         driver = new AppiumDriver<MobileElement>(url, cap);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
