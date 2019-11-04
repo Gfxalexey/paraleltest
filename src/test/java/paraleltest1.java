@@ -41,7 +41,6 @@ public class paraleltest1 extends BaseTest {
         loginPage.loginsucces("320555683", "1q1q1q", "1q1q1q");
         Thread.sleep(5000); //fgdfg
 
-driver.closeApp();
     }
 
 }

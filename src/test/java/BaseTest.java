@@ -4,6 +4,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
@@ -11,11 +12,14 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    public AppiumDriver<MobileElement> driver;
+    public AppiumDriver driver;
 
-    @Parameters({"device", "appiumServer"})
-    @BeforeMethod
-    public void setup(String device, String appiumServer) throws MalformedURLException {
+    public static ThreadLocal<AppiumDriver> tdriver = new ThreadLocal<AppiumDriver>();
+        @Parameters({"device", "appiumServer"})
+        @BeforeTest (alwaysRun = true)
+
+    public AppiumDriver setup(String device, String appiumServer) throws MalformedURLException {
+            try {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability(MobileCapabilityType.DEVICE_NAME, device);
         cap.setCapability(MobileCapabilityType.UDID, device);
@@ -27,7 +31,26 @@ public class BaseTest {
         URL url = new URL(appiumServer);
         driver = new AppiumDriver<MobileElement>(url, cap);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            Assert.assertNotNull(driver);
+            } catch (Exception exp) {
+                System.out.println("Cause is  " + exp.getCause());
+                System.out.println("Massage is  " + exp.getMessage());
+                exp.printStackTrace();
+            }
+        tdriver.set(driver);
+        return getDriver();
+    }
+    public static synchronized AppiumDriver getDriver() {
+        return tdriver.get();
     }
 
-
-}
+@AfterMethod
+    public void afterMethod() {
+        System.out.println("afterMethod(): quit driver");
+        try {
+            driver.quit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    }
