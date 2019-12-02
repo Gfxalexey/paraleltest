@@ -11,24 +11,12 @@ public class LoginPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver, ofSeconds(8)), this);
     }
 
-    @AndroidFindBy(xpath = "//android.widget.Button[@content-desc=\"כניסה\"]\n")
+     @iOSXCUITFindBy(accessibility = "כניסה לחשבונך")
     public MobileElement EnterButton;
 
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"תעודת זהות\"]/android.widget.LinearLayout/android.widget.EditText\n")
-    public MobileElement typeID;
 
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"סיסמה\"]/android.widget.LinearLayout/android.widget.EditText\n")
-    public MobileElement typePAS;
-
-    @AndroidFindBy(xpath = "//android.widget.LinearLayout[@content-desc=\"קוד מזהה\"]/android.widget.LinearLayout/android.widget.EditText\n")
-    public MobileElement typeCODE;
-
-    public LoginPage loginsucces(String id, String pass, String code) {
-        typeID.sendKeys(id);
-        typePAS.sendKeys(pass);
-        typeCODE.sendKeys(code);
-        EnterButton.click();
-        return this;
+ 
+  
     }
 
 }
