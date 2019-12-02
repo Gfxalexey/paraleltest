@@ -20,21 +20,23 @@ public class BaseTest {
 
     public AppiumDriver setup(String device, String appiumServer, String systemPort) throws MalformedURLException {
             try {
-        DesiredCapabilities cap = new DesiredCapabilities();
-//        cap.setCapability(AutomationName.ANDROID_UIAUTOMATOR2,"uiautomator");
-        cap.setCapability("automationName", "UiAutomator2");
-        cap.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT,systemPort);
-        cap.setCapability(MobileCapabilityType.DEVICE_NAME, device);
-        cap.setCapability(MobileCapabilityType.UDID, device);
-        cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 120);
-        cap.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.ideomobile.discount");
-        cap.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.discount.ui.DiscountSplashActivity");
-        cap.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
-//        cap.setCapability(MobileCapabilityType.VERSION, 9);
-        URL url = new URL(appiumServer);
-        driver = new AppiumDriver<MobileElement>(url, cap);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+       DesiredCapabilities cap = new DesiredCapabilities();
+            cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "IOS");
+            cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
+            cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+            cap.setCapability(MobileCapabilityType.DEVICE_NAME, device);
+            cap.setCapability(MobileCapabilityType.UDID, device);
+            cap.setCapability("xcodeOrgId", "com.discountalex.WebDriverAgentRunner");
+            cap.setCapability("xcodeSigningId", "iPhone Developer");
+            cap.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "ngsoft.il.co.discountbank.discountbank");
+            cap.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, "true");
+            cap.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, systemPort);
+            URL url = new URL(appiumServer);
+            AppiumDriver driver = new AppiumDriver<>(url, cap);
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             Assert.assertNotNull(driver);
+                
+                
             } catch (Exception exp) {
                 System.out.println("Cause is  " + exp.getCause());
                 System.out.println("Massage is  " + exp.getMessage());
